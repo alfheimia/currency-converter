@@ -1,0 +1,155 @@
+/* Reset default styling */
+body, h1, h2, p {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --BGCOLOR: transparent;
+  --TEXTCOLOR: #07070A;
+  --BORDERCOLOR: #8797AF;
+  --SHADOWCOLOR: #07070a62;
+  --BTNCOLOR: #8797AF;
+  --BTTEXTCOLOR: #f5f5f5;
+}
+
+/* Body and text styling */
+body {
+  font-family: 'Amiri', serif;
+  background-color: var(--BGCOLOR);
+  color: var(--TEXTCOLOR);
+}
+
+/* Container styling */
+.container {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  width: 15rem;
+  height: 16rem;
+  background-color: var(--BGCOLOR);
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem var(--SHADOWCOLOR);
+}
+
+/* Main section */
+.main {
+  padding: 1.5rem;
+}
+
+/* Form group */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+/* Input field */
+.form-group-control {
+  border-radius: 0.3rem;
+  border: 1px solid var(--BORDERCOLOR);
+  width: 100%;
+  padding-left: 0.3rem;
+}
+
+/* Prevent text wrapping in select options */
+.form-group-control option {
+  white-space: nowrap;
+}
+
+/* Button styling */
+.button-group {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  border-radius: 0.8rem;
+  padding: 0.1rem;
+  background-color: var(--BTNCOLOR);
+  color: var(--BTTEXTCOLOR);
+  text-align: center;
+  font-weight: bold;
+  width: 2.5rem;
+  height: 2.5rem;
+  box-shadow: ;
+}
+
+.btn-image {
+  fill: var(--BTTEXTCOLOR);
+  display: block;
+}
+
+/* Reset button */
+.btn-primary.reset {
+  background-color: var(--BORDERCOLOR);
+  border-color: var(--BORDERCOLOR);
+}
+
+/* Reset button image */
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+/* Center text */
+.text-center {
+  text-align: center;
+}
+
+/* Select region */
+.row {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.col {
+  flex:1;
+  margin-bottom: 1rem;
+  padding: 0px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-group-prepend {
+  flex: 1;
+}
+
+.input-group-prepend-text {
+  display: flex;
+  width: 3em;
+  background-color: var(--BORDERCOLOR);
+  color: var(--BTTEXTCOLOR);
+  font-weight: bold;
+  border-top-left-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0rem 0.4rem;
+}
+
+.form-group-select {
+  font-size: 0.95rem;
+  color: var(--TEXTCOLOR);
+  border: 1px solid var(--BORDERCOLOR);
+  border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+  flex-grow: 1;
+  padding-left: 0.3rem;
+}
+
+.output-box {
+  padding: 0.4rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--BTNCOLOR);
+}
+/* Converted amount display */
+
