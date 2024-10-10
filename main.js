@@ -1,60 +1,88 @@
-// Include api for currency change
+// API endpoint for currency exchange rates
 const api = "https://api.exchangerate-api.com/v6/latest";
 
-// For selecting different controls
-let search = document.querySelector(".searchBox");
-let convert = document.querySelector(".convert");
-let fromCurrecy = document.querySelector(".from");
-let toCurrecy = document.querySelector(".to");
-let finalAmount = document.getElementById("finalAmount");
-let reset = document.querySelector(".reset");
-let resultFrom;
-let resultTo;
-let searchValue;
+// Selecting DOM elements
+const fromCurrency = document.getElementById("from-currency");
+const toCurrency = document.getElementById("to-currency");
+const amountInput = document.getElementById("amount");
+const resultInput = document.getElementById("result");
+const convertBtn = document.querySelector("button[type='submit']");
+const form = document.getElementById("converter-form");
 
-// Event when currency is changed
-fromCurrecy.addEventListener("change", (event) => {
-  resultFrom = `${event.target.value}`;
+// Select the clear button
+const clearBtn = document.getElementById("clear-btn");
+
+let fromRate;
+let toRate;
+
+// Event listener for form submission
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (fromCurrency.value && toCurrency.value && amountInput.value) {
+    getExchangeRate();
+  }
 });
 
-// Event when currency is changed
-toCurrecy.addEventListener("change", (event) => {
-  resultTo = `${event.target.value}`;
-});
+// Fetch exchange rates and update the DOM
+function getExchangeRate() {
+  fetch(api)
+    .then((response) => response.json())
+    .then((data) => {
+      const rates = data.rates;
+      fromRate = rates[fromCurrency.value];
+      toRate = rates[toCurrency.value];
 
-search.addEventListener("input", updateValue);
-
-// Function for updating value
-function updateValue(e) {
-  searchValue = e.target.value;
-}
-
-// When user clicks, it calls function getresults
-convert.addEventListener("click", getResults);
-reset.addEventListener("click", clearVal);
-
-// Function getresults
-function getResults() {
-  fetch(`${api}`)
-    .then((currency) => {
-      return currency.json();
+      if (fromRate && toRate) {
+        const fromAmount = parseFloat(amountInput.value);
+        const exchangeRate = toRate / fromRate;
+        const toAmount = (fromAmount * exchangeRate).toFixed(2);
+        resultInput.value = toAmount;
+      } else {
+        resultInput.value = "Invalid currency";
+      }
     })
-    .then(displayResults);
+    .catch((error) => {
+      console.error("Error fetching exchange rates:", error);
+      resultInput.value = "Error occurred";
+    });
 }
 
-// Display results after conversion
-function displayResults(currency) {
-  let fromRate = currency.rates[resultFrom];
-  let toRate = currency.rates[resultTo];
-  finalAmount.innerHTML = ((toRate / fromRate) * searchValue).toFixed(2);
-  finalAmount.style.color = "#07070A";
-  finalAmount.style.fontWeight = "bold";
-  finalAmount.style.backgroundColor = "#FFBC42";
-  finalAmount.style.border = "none";
+// Populate currency dropdowns
+function populateCurrencyDropdowns() {
+  fetch(api)
+    .then((response) => response.json())
+    .then((data) => {
+      const currencies = Object.keys(data.rates);
+      currencies.forEach((currency) => {
+        const option = document.createElement("option");
+        option.value = currency;
+        option.text = currency;
+        fromCurrency.add(option.cloneNode(true));
+        toCurrency.add(option);
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching currencies:", error);
+    });
 }
 
-// When user click on reset button
-function clearVal() {
-  window.location.reload();
-  document.getElementById("finalAmount").innerHTML = "Converted Amount";
+// Function to toggle dark mode
+function toggleDarkMode() {
+  const htmlElement = document.documentElement;
+  if (htmlElement.getAttribute("data-theme") === "dark") {
+    htmlElement.removeAttribute("data-theme");
+  } else {
+    htmlElement.setAttribute("data-theme", "dark");
+  }
 }
+
+// Event listener for clear button
+clearBtn.addEventListener("click", () => {
+  fromCurrency.value = "";
+  toCurrency.value = "";
+  amountInput.value = "";
+  resultInput.value = "";
+});
+
+// Initialize the app
+populateCurrencyDropdowns();

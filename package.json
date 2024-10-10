@@ -10,5 +10,31 @@
   },
   "devDependencies": {
     "vite": "^5.4.1"
-  }
+  },
+  "description": "A web-based currency converter tool",
+  "main": "index.js",
+  "dependencies": {
+    "@material/web": "^2.2.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "esbuild": "^0.21.5",
+    "nanoid": "^3.3.7",
+    "picocolors": "^1.1.0",
+    "postcss": "^8.4.47",
+    "rollup": "^4.22.0",
+    "source-map-js": "^1.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alfheimia/currency-converter.git"
+  },
+  "keywords": [
+    "currency",
+    "converter"
+  ],
+  "author": "TinTin Chen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alfheimia/currency-converter/issues"
+  },
+  "homepage": "https://github.com/alfheimia/currency-converter#readme"
 }
